@@ -6,12 +6,13 @@
 
 // Needed header for all plugins
 
-import { addAccessory } from "@api/MessageAccessories";
 import { addPreSendListener, removePreSendListener } from "@api/MessageEvents";
+import { addButton } from "@api/MessagePopover";
 import { updateMessage } from "@api/MessageUpdater";
 import { definePluginSettings } from "@api/Settings";
+import { ImageVisible } from "@components/Icons";
 import definePlugin from "@utils/types";
-import { Message } from "discord-types/general";
+import { ChannelStore } from "@webpack/common";
 
 const pluginSettings = definePluginSettings({});
 
@@ -29,8 +30,19 @@ export default definePlugin({
         this.preSend = addPreSendListener((_channelId, msg) => {
             msg.content = this.transformText(msg.content);
         });
-        addAccessory("vc-translation", props => <ReverseAccessory message={props.message} />);
-    },
+        addButton("Reverse Text", message => {
+            return {
+                label: "reversed text",
+                icon: ImageVisible,
+                message: message,
+                channel: ChannelStore.getChannel(message.channel_id),
+                onClick: async () => {
+                    const reversedText = message.content.split("").reverse().join("");
+                    updateMessage(message.channel_id, message.id, { content: reversedText });
+                }
+            };
+        });
+        },
     stop() {
         removePreSendListener(this.preSend);
     },
@@ -48,15 +60,3 @@ export default definePlugin({
         return reversedParts.join("");
     }
 });
-
-export function ReverseAccessory({ message }: { message: Message; }) {
-    return (
-        <button onClick={async () => {
-
-            const reversedText = message.content.split("").reverse().join("");
-            updateMessage(message.channel_id, message.id, { content: reversedText }); // Use editMessage to update the content
-        }}>
-        Reverse Text
-        </button>
-    );
-            }
