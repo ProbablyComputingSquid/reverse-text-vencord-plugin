@@ -16,18 +16,23 @@ pnpm install
 pnpm build
 pnpm inject
 ```
-Restart discord and you should see the plugins in the plugin list. Enable the plugin for all it's functionalities!<br>
+#### important! place the file in the correct location!
+The plugin files should be placed in a folder you create called `/userplugins/` in the `vencord/src/` directory <br>
+
+![location where files should be stored](https://cloud-7we8ps4l7-hack-club-bot.vercel.app/0image.png)
+
+Restart Discord, and you should see the plugins in the plugin list. Enable the plugin for all it's functionalities!<br>
 ### How do I use this plugin?
 ![enabled plugin](https://cloud-j37nlsog0-hack-club-bot.vercel.app/0image.png)
-Once each plugin is enabled, all messages sent will be fliped or reversed, respectively. <br>
-To translate fliped or reversed messages, there is a "reverse/flip" button that appears on the message options bar. Examples are shown below <br>
-![pre-unflip](https://cloud-qvyano5y9-hack-club-bot.vercel.app/0image.png)
-After using chatbar button:
-![post-unflip](https://cloud-qvyano5y9-hack-club-bot.vercel.app/1image.png)
-There are buttons for both flip and reverse. 
+Once each plugin is enabled, all messages sent will be flipped or reversed, respectively. <br>
+To translate flipped or reversed messages, there is a "reverse/flip" button that appears on the message options bar. Examples are shown below <br>
+![pre-un-flip](https://cloud-qvyano5y9-hack-club-bot.vercel.app/0image.png)
+After using the chat bar button:
+![post-un-flip](https://cloud-qvyano5y9-hack-club-bot.vercel.app/1image.png)
+There are buttons for both flip and reverse.
 
 ### Known issues
-- the plugin doesn't unflip messages not sent with the plugin itself, because it works with a unicode character mapping, not a "mirror font"
+- the plugin doesn't un-flip messages not sent with the plugin itself, because it works with a unicode character mapping, not a "mirror font"
 - the plugin doesn't "flip" emojis because that's not possible
 - the plugin doesn't "reverse" emojis because that's not possible
 - the plugin doesn't correctly "flip" text that is not with latin characters (English), because it uses a character mapping
